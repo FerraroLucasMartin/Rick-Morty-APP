@@ -2,7 +2,6 @@ import SearchBar from "./SearchBar";
 import styled from "styled-components";
 import { NavLink, useLocation } from "react-router-dom";
 
-
 const NavDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -20,11 +19,10 @@ const H3 = styled.h3`
   justify-self: center;
   color: white;
 
-  &:hover{
-  font-weight: 400;
-  text-shadow:
-  0 0 5px rgb(0, 0, 0);
-   }
+  &:hover {
+    font-weight: 400;
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+  }
 `;
 
 const Img = styled.img`
@@ -37,37 +35,48 @@ const Img = styled.img`
 const LinkDiv = styled.div`
   display: flex;
   justify-content: space-evenly;
-  width:200px;
+  width: 200px;
   justify-self: start;
 `;
 
+const Button = styled.button`
+  font-family: "Avenir Medium", sans-serif;
+  background-color: transparent;
+  font-weight: bold;
+  /* border-color: rgb(0,58,69); */
+  border-width: 0px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100px;
+  &:hover {
+    color: whitesmoke;
+    box-shadow: 0 0 5px rgb(40, 249, 109), 0 0 10px rgb(40, 249, 109);
+  }
+`;
+
 export default function Nav(props) {
+  const location = useLocation();
 
-  const location= useLocation();
+  if (location.pathname === "/") return null;
+  else {
+    return (
+      <NavDiv>
+        <Img src="https://image.tmdb.org/t/p/original/kCyZc7mvqHdeUGpguSGxsWPxqpI.png" />
 
-  if (location.pathname === "/") return (null);
-  else{
-  return (
-    <NavDiv>
-      <Img src="https://image.tmdb.org/t/p/original/kCyZc7mvqHdeUGpguSGxsWPxqpI.png" />
+        <LinkDiv>
+          <NavLink to="/home" style={{ textDecoration: "inherit" }}>
+            <H3>Home</H3>
+          </NavLink>
 
-      <LinkDiv>
-        <NavLink 
-        to="/home"
-        style={{textDecoration: 'inherit'}}>
-          <H3>Home</H3>
-        </NavLink>
+          <NavLink to="/about" style={{ textDecoration: "inherit" }}>
+            <H3>About</H3>
+          </NavLink>
+        </LinkDiv>
 
-        <NavLink 
-        to="/about"
-        style={{textDecoration: 'inherit'}}>
-          <H3>About</H3>
-        </NavLink>
-
-      </LinkDiv>
-
-      <SearchBar onSearch={props.onSearch} />
-    </NavDiv>
-  );
-  };
+        <SearchBar onSearch={props.onSearch} />
+        <Button>Log out</Button>
+      </NavDiv>
+    );
+  }
 }

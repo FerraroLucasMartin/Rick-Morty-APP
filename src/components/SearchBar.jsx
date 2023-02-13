@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Button=  styled.button`
 font-family: "Avenir Medium", sans-serif;
+font-weight: bold;
 background-color: rgb(0,179,203);
 border-color: rgb(0,58,69);
 border-width: 1px;
@@ -11,7 +12,7 @@ border-radius: 10px;
 padding: 10px;
 width: 100px;
 &:hover{
-font-weight: bold;
+color: whitesmoke;
 box-shadow:
    0 0 5px rgb(40,249,109),
    0 0 10px rgb(40,249,109); ;
@@ -35,7 +36,7 @@ export default function SearchBar(props) {
 
    return (
       <div>
-         <Input type='search' onChange={handleSearch}/>
+      <Input type='search' onChange={handleSearch}/>
       <Button onClick={() => props.onSearch(character)}>Agregar</Button>
       </div>
    );
