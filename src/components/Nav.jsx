@@ -12,16 +12,19 @@ const NavDiv = styled.div`
   background-color: rgb(243, 203, 48, 0.2);
   border-radius: 10px;
   border-color: black;
+  font-family: 'Courier New', Courier, monospace;
 `;
 
 const H3 = styled.h3`
   display: flex;
   justify-self: center;
-  color: white;
+  color: #000000;
 
   &:hover {
-    font-weight: 400;
-    text-shadow: 0 0 5px rgb(0, 0, 0);
+    cursor: pointer;
+    /* font-weight: 400; */
+    color: whitesmoke;
+    /* text-shadow: 0 0 5px rgb(0, 0, 0); */
   }
 `;
 
@@ -40,7 +43,7 @@ const LinkDiv = styled.div`
 `;
 
 const Button = styled.button`
-  font-family: "Avenir Medium", sans-serif;
+ font-family: 'Courier New', Courier, monospace;
   background-color: transparent;
   font-weight: bold;
   /* border-color: rgb(0,58,69); */
@@ -51,9 +54,14 @@ const Button = styled.button`
   width: 100px;
   &:hover {
     color: whitesmoke;
-    box-shadow: 0 0 5px rgb(40, 249, 109), 0 0 10px rgb(40, 249, 109);
+    /* shadow: 0 0 5px rgb(40, 249, 109), 0 0 10px rgb(40, 249, 109); */
   }
 `;
+
+const Div = styled.div`
+display: flex;
+  justify-content: space-evenly;
+`
 
 export default function Nav(props) {
   const location = useLocation();
@@ -72,10 +80,17 @@ export default function Nav(props) {
           <NavLink to="/about" style={{ textDecoration: "inherit" }}>
             <H3>About</H3>
           </NavLink>
+
+          <NavLink to="/favorites" style={{ textDecoration: "inherit" }}>
+            <H3>Favs</H3>
+          </NavLink>
         </LinkDiv>
 
+        <Div>
         <SearchBar onSearch={props.onSearch} />
-        <Button>Log out</Button>
+        <Button onClick={props.logout}>Log out</Button>
+        </Div>
+
       </NavDiv>
     );
   }

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Validation from "./Validation";
 
 const Button = styled.button`
-  font-family: "Avenir Medium", sans-serif;
+font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   background-color: rgb(0, 179, 203);
   border-color: rgb(0, 58, 69);
@@ -14,6 +14,7 @@ const Button = styled.button`
   padding: 10px;
   width: 100px;
   &:hover {
+    cursor: pointer;
     color: whitesmoke;
     box-shadow: 0 0 5px rgb(40, 249, 109), 0 0 10px rgb(40, 249, 109);
   }
@@ -93,7 +94,7 @@ export default function Form(props) {
       {errors.password && click === true && <h5>{errors.password}</h5>}
       <br />
 
-      <Button onClick={() => handlesubmit()}>LOGIN</Button>
+      <Button onClick={() => handlesubmit()}>Login</Button>
     </Wrap>
   );
 }

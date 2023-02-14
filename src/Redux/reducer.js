@@ -1,4 +1,4 @@
-
+import { AGREGAR_FAV, ELIMINAR_FAV } from "./actions";
 
 const initialState= {
     myFavorites:[],

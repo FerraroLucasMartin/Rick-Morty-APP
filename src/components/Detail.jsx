@@ -33,7 +33,6 @@ const Img = styled.img`
 
 const Button = styled.button`
   margin: 25px;
-  font-family: "Avenir Medium", sans-serif;
 background-color: rgb(0,179,203);
 border-color: rgb(0,58,69);
 border-width: 1px;

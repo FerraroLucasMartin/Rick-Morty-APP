@@ -1,15 +1,17 @@
+export const AGREGAR_FAV = 'AGREGAR_FAV'
+export const ELIMINAR_FAV = 'ELIMINAR_FAV'
 
 export function  agregarFav(character) {
     return {
       type: 'AGREGAR_FAV',
-      payload: {}
+      payload: character,
     }
 };
 
 export function  eliminarFav(characterId) {
     return {
       type: 'ELIMINAR_FAV',
-      payload: {}
+      payload: characterId,
     }
 };
 

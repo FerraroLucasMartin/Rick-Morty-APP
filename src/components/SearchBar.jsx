@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const Button=  styled.button`
-font-family: "Avenir Medium", sans-serif;
+font-family: 'Courier New', Courier, monospace;
 font-weight: bold;
 background-color: rgb(0,179,203);
 border-color: rgb(0,58,69);

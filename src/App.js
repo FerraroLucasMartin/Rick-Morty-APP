@@ -4,12 +4,14 @@ import Nav from "./components/Nav.jsx";
 import About from "./components/About";
 import Detail from "./components/Detail";
 import Form from "./components/Form/Form";
+import Favorites from "./components/Favorites"
 
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Location, useLocation, useNavigate, } from "react-router-dom";
+import { Location, useLocation, useNavigate } from "react-router-dom";
+import { Provider } from "react-redux";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -23,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+  font-family: 'Courier New', Courier, monospace;
   }`;
 
 const DivWrap = styled.div`
@@ -50,6 +53,11 @@ function App() {
     }
   }
 
+  function logout() {
+    setAccess(false);
+    navigate("/");
+  }
+
   useEffect(() => {
     !Access && navigate("/");
   }, [Access]);
@@ -73,20 +81,25 @@ function App() {
   const location = useLocation();
 
   return (
-    <DivWrap>
-      <GlobalStyle />
-      {location.pathname !== "/" && <Nav onSearch={onSearch} />}
-      <Routes>
-        <Route exact path="/" element={<Form login={login}/>} />
-        <Route
-          exact
-          path="/home"
-          element={<Cards characters={characters} onClose={onclose} />}
-        />
-        <Route exact path="/about" element={<About />} />
-        <Route exact path="/detail/:detailId" element={<Detail />} />
-      </Routes>
-    </DivWrap>
+      <DivWrap>
+        <GlobalStyle />
+        {location.pathname !== "/" && (
+          <Nav onSearch={onSearch} logout={logout} />
+        )}
+        <Routes>
+          <Route exact path="/" element={<Form login={login} />} />
+          <Route
+            exact
+            path="/home"
+            element={<Cards characters={characters} onClose={onclose} />}
+          />
+          <Route exact path="/about" element={<About />} />
+          <Route exact path="/detail/:detailId" element={<Detail />} />
+          <Route exact path="/favorites" element={<Favorites />} />
+
+        
+        </Routes>
+      </DivWrap>
   );
 }
 

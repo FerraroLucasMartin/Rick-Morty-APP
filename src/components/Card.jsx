@@ -14,7 +14,6 @@ border-style: outset;
 border-color: rgb(0,58,69);
 border-width: 1.5px;
 border-radius: 10px;
-font-family: "Avenir Medium", sans-serif;
 width:20%;
 height: 20%;
 background-color: rgb(243,203,48, 0.2);
@@ -56,8 +55,10 @@ const NameH2= styled.h2`
 border-radius: 5px;
 padding: 5px;
 font-size: 17px;
+width: fit-content;
 bottom: 45px;
 left: 7px;
+margin-top: -30px;
 background-color: rgb(50, 10, 10, 0.7);
 color: whitesmoke;
 `
@@ -66,18 +67,30 @@ const DetailDiv= styled.div`
 display: flex;
 justify-content: space-evenly;
 font-size: 12px;
+margin-top: -15px;
 `
 
 const FavButton= styled.button`
-display: flex;
+/* width: fit-content; */
 
 `
 //COMPONENT
 
-export default function Card(props) {
-//   const [isFav, setIsFav]=useState({
-//    isFav:false,
-//   })
+export function Card(props) {
+  const [isFav, setIsFav]=useState(false)
+
+  function handleFavorite(props){
+   if (isFav===true) {
+      setIsFav(false)
+      props.eliminarFav(props.id)
+   }
+   if (isFav===false) {
+      setIsFav(true)
+      props.agregarFav({
+         name: props.name
+      })
+   }
+  }
 
 //   function handleFavorite(){
 //    if()
@@ -85,14 +98,20 @@ export default function Card(props) {
    
    return (
       <CardDiv>
-         {/* <FavButton></FavButton> */}
 
+{isFav ? (<FavButton onClick={handleFavorite}>❤️</FavButton>) 
+         : (<FavButton onClick={handleFavorite}>🤍</FavButton>)
+         }
+         
+      {console.log(props)}
          <CardButton onClick={props.onClose}>X</CardButton>
          <CardImg  src={props.image} alt="" />
 
       <Link to= {`/detail/${props.id}`}> 
             <NameH2>{props.name}</NameH2>
          </Link>
+
+       
 
          <DetailDiv>
             <h2>{props.species}</h2>
@@ -105,11 +124,15 @@ export default function Card(props) {
 
 //REDUX FUNCTIONS
 
-// function mapDispatchToProps(dispatch){
-//    return{
-//       agregarFav: ()=> store.dispatch(agregarFav()),
-//       eliminarFav:()=> store.dispatch(eliminarFav()),
-//    }
-// }
+export function mapDispatchToProps(dispatch){
+   return{
+      agregarFav:(character)=>store.dispatch(agregarFav(character)),
+      eliminarFav:(characterId)=>store.dispatch(eliminarFav(characterId)),
+   }
+}
 
-// export default connect(mapDispatchToProps)(Card);
+export function mapStateToProps(state){
+return{myFavorites: state.myFavorites
+}};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Card);
