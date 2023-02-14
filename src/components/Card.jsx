@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { agregarFav, eliminarFav } from "../Redux/actions"
 import store from "../Redux/store"
 import {connect}  from "react-redux"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 //STYLED COMPONENTS
 
@@ -79,22 +79,25 @@ const FavButton= styled.button`
 export function Card(props) {
   const [isFav, setIsFav]=useState(false)
 
-  function handleFavorite(props){
+  function handleFavorite(){
    if (isFav===true) {
       setIsFav(false)
       props.eliminarFav(props.id)
    }
    if (isFav===false) {
       setIsFav(true)
-      props.agregarFav({
-         name: props.name
-      })
+      props.agregarFav(props)
    }
   }
 
-//   function handleFavorite(){
-//    if()
-//   }
+  useEffect(() => {
+   props.myFavorites &&
+   props.myFavorites.forEach((fav) => {
+      if (fav.id === props.id) {
+         setIsFav(true);
+      }
+   });
+}, [props.myFavorites]);
    
    return (
       <CardDiv>
@@ -104,6 +107,7 @@ export function Card(props) {
          }
          
       {console.log(props)}
+      
          <CardButton onClick={props.onClose}>X</CardButton>
          <CardImg  src={props.image} alt="" />
 
@@ -126,13 +130,13 @@ export function Card(props) {
 
 export function mapDispatchToProps(dispatch){
    return{
-      agregarFav:(character)=>store.dispatch(agregarFav(character)),
-      eliminarFav:(characterId)=>store.dispatch(eliminarFav(characterId)),
-   }
+      agregarFav: function(fav) {dispatch(agregarFav(fav))},
+      eliminarFav: function(id) {dispatch(eliminarFav(id))},
+   };
 }
-
+   
 export function mapStateToProps(state){
-return{myFavorites: state.myFavorites
-}};
+   return{myFavorites: state.myFavorites}
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(Card);

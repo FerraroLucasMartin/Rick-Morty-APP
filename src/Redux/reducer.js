@@ -15,7 +15,7 @@ switch (action.type) {
     case ELIMINAR_FAV:
         return {
             ...state,
-            myFavorites: state.myFavorites.filter( character => character.id !== action.payload.id)
+            myFavorites: state.myFavorites.filter( character => character.id !== action.payload)
         }
 
     default: 

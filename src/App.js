@@ -58,9 +58,9 @@ function App() {
     navigate("/");
   }
 
-  useEffect(() => {
-    !Access && navigate("/");
-  }, [Access]);
+  // useEffect(() => {
+  //   !Access && navigate("/");
+  // }, [Access]);
 
   function onSearch(character) {
     fetch(`https://rickandmortyapi.com/api/character/${character}`)
