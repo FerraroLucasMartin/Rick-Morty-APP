@@ -83,7 +83,7 @@ export default function Nav(props) {
 
           <NavLink to="/favorites" style={{ textDecoration: "inherit" }}>
             <H3>Favs</H3>
-          </NavLink>
+          </NavLink> 
         </LinkDiv>
 
         <Div>

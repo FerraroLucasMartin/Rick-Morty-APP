@@ -6,13 +6,13 @@ const initialState= {
 
 export default function RootReducer (state=initialState, action){
 switch (action.type) {
-    case 'AGREGAR_FAV':
+    case AGREGAR_FAV:
         return {
             ...state,
             myFavorites: [...state.myFavorites,action.payload],
         };
 
-    case 'ELIMINAR_FAV':
+    case ELIMINAR_FAV:
         return {
             ...state,
             myFavorites: state.myFavorites.filter( character => character.id !== action.payload.id)
