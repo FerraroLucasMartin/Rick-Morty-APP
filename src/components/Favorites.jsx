@@ -1,8 +1,9 @@
 import {Card} from './Card';
 import styled from 'styled-components';
-import { mapStateToProps, connect } from 'react-redux';
-import { agregarFav, eliminarFav } from '../Redux/actions';
+import { mapStateToProps, connect, useDispatch } from 'react-redux';
+import { agregarFav, eliminarFav, orderCards, filterCards } from '../Redux/actions';
 import { useEffect } from 'react';
+
 
 
 const CardsDivWrap= styled.div`
@@ -31,9 +32,27 @@ export function Favorites(props) {
       )
    }) 
 
+   const dispatch= useDispatch();
+
    return(
+      <>
+      <div>
+         <select>
+         <option value="Ascendente" onSelect={()=>console.log("click")}>Ascendente</option>
+         <option value="Descendente" onSelect={(e)=> dispatch(orderCards(e.target.value))}>Descendente</option>
+         </select>
+
+         <select>
+         <option value="Male"  onSelect={(e)=> dispatch(filterCards(e.target.value))}>Male</option>
+         <option value="Female" onSelect={(e)=> dispatch(filterCards(e.target.value))}>Female</option>
+         <option value="Genderless" onSelect={(e)=> dispatch(filterCards(e.target.value))}>Genderless</option>
+         <option value="Unknown" onSelect={(e)=> dispatch(filterCards(e.target.value))}>Unknown</option>
+         </select>
+         
+      </div>
 
       <CardsDivWrap>{charMap}</CardsDivWrap>
+      </>
    ) 
    
 }
@@ -42,7 +61,8 @@ export function Favorites(props) {
 
 export function mapStatetoProps(state){
     return{
-        myFavorites: state.myFavorites
+        myFavorites: state.myFavorites,
+        allCharacters: state.allCharacters
     }
 
 }
