@@ -34,10 +34,17 @@ export default function SearchBar(props) {
       setCharacter(value)
    }
 
+   const handleRandom = ()=>{
+   const max = 827;
+   const num = Math.floor(Math.random()*(max));
+   props.onSearch(num);
+   }
+
    return (
       <div>
       <Input type='search' onChange={handleSearch}/>
       <Button onClick={() => props.onSearch(character)}>Agregar</Button>
+      <Button onClick={() => handleRandom()}>Random</Button>
       </div>
    );
 }

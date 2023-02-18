@@ -1,8 +1,8 @@
 import {Card} from './Card';
 import styled from 'styled-components';
-import { mapStateToProps, connect, useDispatch } from 'react-redux';
-import { agregarFav, eliminarFav, orderCards, filterCards } from '../Redux/actions';
-import { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import {orderCards, filterCards } from '../Redux/actions';
+
 
 
 
@@ -34,19 +34,36 @@ export function Favorites(props) {
 
    const dispatch= useDispatch();
 
+   function handleDispatch(e){
+      const {name, value} = e.target;
+
+      if(name === "orden") {
+         return (
+            dispatch(orderCards(value)),
+            console.log(myFavorites)
+         )
+         
+      }
+
+      if(name === "filtro"){
+         return dispatch(filterCards(value))
+      }
+
+   }
+
    return(
       <>
       <div>
-         <select>
-         <option value="Ascendente" onSelect={()=>console.log("click")}>Ascendente</option>
-         <option value="Descendente" onSelect={(e)=> dispatch(orderCards(e.target.value))}>Descendente</option>
+         <select name= "orden" onClick={handleDispatch}>
+         <option value="Ascendente" >Ascendente</option>
+         <option value="Descendente"  >Descendente</option>
          </select>
 
-         <select>
-         <option value="Male"  onSelect={(e)=> dispatch(filterCards(e.target.value))}>Male</option>
-         <option value="Female" onSelect={(e)=> dispatch(filterCards(e.target.value))}>Female</option>
-         <option value="Genderless" onSelect={(e)=> dispatch(filterCards(e.target.value))}>Genderless</option>
-         <option value="Unknown" onSelect={(e)=> dispatch(filterCards(e.target.value))}>Unknown</option>
+         <select name= "filtro" onClick={handleDispatch}>
+         <option value="Male"  >Male</option>
+         <option value="Female"  >Female</option>
+         <option value="Genderless" >Genderless</option>
+         <option value="Unknown"  >Unknown</option>
          </select>
          
       </div>
@@ -59,7 +76,7 @@ export function Favorites(props) {
 
 //REDUX FUNCTIONS
 
-export function mapStatetoProps(state){
+export function mapStateToProps(state){
     return{
         myFavorites: state.myFavorites,
         allCharacters: state.allCharacters
@@ -67,4 +84,4 @@ export function mapStatetoProps(state){
 
 }
 
-export default connect(mapStatetoProps, null)(Favorites)
+export default connect(mapStateToProps, null)(Favorites)

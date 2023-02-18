@@ -5,6 +5,7 @@ import About from "./components/About";
 import Detail from "./components/Detail";
 import Form from "./components/Form/Form";
 import Favorites from "./components/Favorites"
+import Error404 from "./components/Error404"
 
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
@@ -26,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
   background-size: cover;
   background-repeat: no-repeat;
   font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
   }`;
 
 const DivWrap = styled.div`
@@ -79,14 +81,25 @@ function App() {
   }
 
   const location = useLocation();
+  
+  function navRender(){
+    if (location.pathname === "/home" || 
+    location.pathname === "/about" ||
+    location.pathname === "/favorites" ||
+    location.pathname === "/detail/:detailId")
+    {return <Nav onSearch={onSearch} logout={logout} />}
+    else return null
+  }
+
 
   return (
       <DivWrap>
         <GlobalStyle />
-        {location.pathname !== "/" && (
-          <Nav onSearch={onSearch} logout={logout} />
-        )}
+       
+        {navRender()}
+
         <Routes>
+          
           <Route exact path="/" element={<Form login={login} />} />
           <Route
             exact
@@ -96,8 +109,7 @@ function App() {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/detail/:detailId" element={<Detail />} />
           <Route exact path="/favorites" element={<Favorites />} />
-
-        
+          <Route path= "*" element={<Error404/>}/>
         </Routes>
       </DivWrap>
   );

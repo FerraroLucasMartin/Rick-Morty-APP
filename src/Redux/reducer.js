@@ -33,10 +33,11 @@ switch (action.type) {
                 if(charA.id > charB.id){
                     return action.payload === "Ascendente" ? 1 : -1
                 }
-
+ 
                 if(charA.id < charB.id){
                     return action.payload === "Descendente" ? -1 : 1
                 }
+                else return 0
             })
         };    
 

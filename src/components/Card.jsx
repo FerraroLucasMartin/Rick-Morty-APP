@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import { agregarFav, eliminarFav } from "../Redux/actions"
-import store from "../Redux/store"
 import {connect}  from "react-redux"
 import { useState, useEffect } from "react"
+
 
 //STYLED COMPONENTS
 
@@ -14,8 +14,8 @@ border-style: outset;
 border-color: rgb(0,58,69);
 border-width: 1.5px;
 border-radius: 10px;
-width:20%;
-height: 20%;
+width:15%;
+height: 15%;
 background-color: rgb(243,203,48, 0.2);
 
 &:hover{
@@ -97,7 +97,7 @@ export function Card(props) {
          setIsFav(true);
       }
    });
-}, [props.myFavorites]);
+}, [props.myFavorites, props.id]);
    
    return (
       <CardDiv>
