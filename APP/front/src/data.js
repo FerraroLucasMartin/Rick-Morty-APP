@@ -1,4 +1,5 @@
-const characters = [
+const characters = 
+[
   {
     name: 'Morty Smith',
     species: 'Human',
